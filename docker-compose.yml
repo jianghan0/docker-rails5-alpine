@@ -1,0 +1,46 @@
+version: '3'
+volumes:
+  db:
+    driver: local
+  redis:
+    driver: local
+services:
+  db:
+    image: mysql:8.0.16
+    command: >
+      mysqld --default-authentication-plugin=mysql_native_password
+             --character-set-server=utf8mb4
+             --collation-server=utf8mb4_bin
+    ports:
+      - "33060:3306"
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  redis:
+    image: redis:5.0.5
+    command: redis-server --appendonly yes
+    ports:
+      - "63790:6379"
+    volumes:
+       - redis:/data
+  web:
+    build:
+      context: .
+      dockerfile: images/rails/Dockerfile
+    command: sh -c "rm /app/tmp/pids/server.pid;
+                    bundle exec rails s -p 3000 -b '0.0.0.0';"
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./source:/app
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root
+      REDIS_HOST: redis
+    depends_on:
+      - db
+      - redis
