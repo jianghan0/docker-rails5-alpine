@@ -27,6 +27,24 @@ mkdir source && cd source
 rails new . --api --mysql
 ```
 
+Edit your database settings
+```yml
+# config/database.yml
+
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DB_HOST") { "127.0.0.1" } %>
+  port: <%= ENV.fetch("DB_PORT") { 3306 } %>
+  username: <%= ENV.fetch("DB_USER") { root } %>
+  password: <%= ENV.fetch("DB_PASSWORD") %>
+
+development:
+  <<: *default
+  database: your-database
+```
+
 Build docker image
 ```sh
 docker-compose build
