@@ -39,9 +39,11 @@ services:
       - ./source:/app
     environment:
       DB_HOST: db
+      DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: root
       REDIS_HOST: redis
+      REDIS_PORT: 6379
     depends_on:
       - db
       - redis
