@@ -5,8 +5,8 @@ RUN apk add --no-cache --update build-base \
                                 mysql-dev \
                                 tzdata
 
-ENV APP_PATH /app \
-    BUNDLE_JOBS 4
+ENV APP_PATH /app
+ENV BUNDLE_JOBS 4
 
 WORKDIR $APP_PATH
 
