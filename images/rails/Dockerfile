@@ -1,6 +1,10 @@
 FROM ruby:2.6.3-alpine3.8
 
 RUN apk add --no-cache --update build-base \
+                                libxml2-dev \
+                                libxslt-dev \
+                                libcurl \
+                                curl-dev \
                                 mysql-client \
                                 mysql-dev \
                                 tzdata
