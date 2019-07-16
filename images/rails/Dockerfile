@@ -7,7 +7,8 @@ RUN apk add --no-cache --update build-base \
                                 curl-dev \
                                 mysql-client \
                                 mysql-dev \
-                                tzdata
+                                tzdata \
+                                less
 
 ENV APP_PATH /app
 ENV BUNDLE_JOBS 4
