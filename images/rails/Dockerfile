@@ -7,6 +7,7 @@ RUN apk add --no-cache --update build-base \
                                 curl-dev \
                                 mysql-client \
                                 mysql-dev \
+                                imagemagick \
                                 tzdata \
                                 less
 
